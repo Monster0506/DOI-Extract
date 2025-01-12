@@ -88,6 +88,7 @@ async function getDOIMetadata(doi) {
         lastPage: getNodeData(records["journal_article"]["pages"], "last_page"),
         doi: getNodeData(records["journal_article"]["doi_data"], "doi"),
         authors: authors,
+        crossRefURL: url,
       };
 
       return metadata;
@@ -97,7 +98,7 @@ async function getDOIMetadata(doi) {
 app.get("/api/doi/:string", async (req, res) => {
   try {
     const doiString = req.params.string; // Extract DOI string from the route
-    const metadata = await getMetadata(doiString); // Call getMetadata with DOI string
+    const metadata = await getDOIMetadata(doiString); // Call getMetadata with DOI string
     res.json(metadata); // Return metadata as JSON
   } catch (error) {
     res

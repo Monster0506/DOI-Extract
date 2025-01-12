@@ -4,6 +4,9 @@ import express from "express";
 import { XMLParser } from "fast-xml-parser";
 const app = express();
 const port = 3000 || process.env.PORT;
+import cors from "cors";
+
+app.use(cors());
 
 async function getDOIMetadata(doi) {
   const crossRefKey = "fx.coudert@chimie-paristech.fr";
@@ -95,7 +98,7 @@ async function getDOIMetadata(doi) {
     });
 }
 // Route handler for /api/doi/:string
-app.get("/api/doi/:string", async (req, res) => {
+app.get("/api/doi/:string", cors(), async (req, res) => {
   try {
     const doiString = req.params.string; // Extract DOI string from the route
     const metadata = await getDOIMetadata(doiString); // Call getMetadata with DOI string

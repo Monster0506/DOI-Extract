@@ -1,0 +1,22 @@
+{
+  "name": "doiextract",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "vercel-start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2",
+    "fast-xml-parser": "^4.5.1",
+    "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

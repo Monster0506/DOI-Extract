@@ -49,7 +49,7 @@ async function getDOIMetadata(doi) {
       };
 
       let authors =
-        records["journal_article"]["contributors"]?.["person_name"] || [];
+        records["journal_article"]?.["contributors"]?.["person_name"] || [];
 
       if (Array.isArray(authors)) {
         authors = authors.map((person) => {
@@ -65,11 +65,11 @@ async function getDOIMetadata(doi) {
         authors = [`${surname}, ${givenName}`];
       }
 
-      let year = records["journal_issue"]["publication_date"];
+      let year = records["journal_issue"]?.["publication_date"];
       if (Array.isArray(year)) {
-        year = records["journal_issue"]["publication_date"][0]["year"];
+        year = records["journal_issue"]?.["publication_date"]?.[0]?.["year"];
       } else {
-        year = records["journal_issue"]["publication_date"]["year"];
+        year = records["journal_issue"]?.["publication_date"]?.["year"];
       }
 
       const metadata = {
@@ -82,15 +82,19 @@ async function getDOIMetadata(doi) {
         issue: getNodeData(records["journal_issue"], "issue"),
         year: year,
         title: Object.values(
-          records["journal_article"]["titles"]["title"],
+          records["journal_article"]?.["titles"]?.["title"],
         ).join(""),
         firstPage: getNodeData(
-          records["journal_article"]["pages"],
+          records["journal_article"]?.["pages"],
           "first_page",
         ),
-        lastPage: getNodeData(records["journal_article"]["pages"], "last_page"),
-        doi: getNodeData(records["journal_article"]["doi_data"], "doi"),
+        lastPage: getNodeData(
+          records["journal_article"]?.["pages"],
+          "last_page",
+        ),
+        doi: getNodeData(records["journal_article"]?.["doi_data"], "doi"),
         authors: authors,
+        abstract: getNodeData(records["journal_article"]?.["abstract"], "p"),
         crossRefURL: url,
       };
 

@@ -62,3 +62,7 @@ GET <http://localhost:3000/api/doi/10.1177%2f1468794106093622>
 ## Demo Page
 
 GET <https://doi-extract.vercel.app/api/doi/10.1177%2f1468794106093622>
+
+## Credits
+
+- [fxcoudert/tools](https://github.com/fxcoudert/tools/blob/master/doi2bib) - Implementation logic and key
